@@ -1,0 +1,79 @@
+
+---Downloaded files---
+The import files for: linoor Demo Import were successfully downloaded!
+Initial max execution time = 120
+Files info:
+Site URL = http://localhost:82/wordpress
+Data file = C:\xampp\htdocs\wordpress/wp-content/themes/linoor/inc/demo-data/sample-data.xml
+Widget file = C:\xampp\htdocs\wordpress/wp-content/themes/linoor/inc/demo-data/widgets.wie
+Customizer file = C:\xampp\htdocs\wordpress/wp-content/themes/linoor/inc/demo-data/customizer.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Sidebar : 
+
+Search - No Title - Widget already exists
+Smart Recent Posts - Latest Posts - Imported
+Categories - No Title - Widget already exists
+Tag Cloud - Tags - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+

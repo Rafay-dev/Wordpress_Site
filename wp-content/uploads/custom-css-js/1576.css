@@ -1,0 +1,43 @@
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">
+/* Add your CSS code here.
+
+For example:
+.example {
+    color: red;
+}
+
+For brushing up on your CSS knowledge, check out http://www.w3schools.com/css/css_syntax.asp
+
+End of comment */
+#services-section .default-tabs li.tab-btn{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  font-size: 13px !important;
+}
+.txt-left{
+  text-align: left !important;
+}
+.txt-right{
+  text-align: right !important;
+}
+.txt-cen{
+  text-align: center !important;
+}
+.txt-justify{
+  text-align: justify !important;
+}
+.main-footer .logo-widget .logo img{
+  width: 160px !important;
+  height: auto !important;
+}
+
+.main-footer .logo-widget .logo{
+  margin-bottom: 10px !important;
+}
+.header-upper .logo-box{
+  margin-left: 80px;
+  margin-right: 0px;
+  padding-top: 15px !important;
+}</style>
+<!-- end Simple Custom CSS and JS -->

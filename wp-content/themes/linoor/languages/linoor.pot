@@ -1,0 +1,470 @@
+# Copyright (C) 2021 Underscores.me
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Linoor 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/linoor\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-01-15T17:36:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: linoor\n"
+
+#. Theme Name of the theme
+msgid "Linoor"
+msgstr ""
+
+#. Theme URI of the theme
+msgid "http://layerdrops.com/linoorwp"
+msgstr ""
+
+#. Description of the theme
+msgid "Description"
+msgstr ""
+
+#. Author of the theme
+msgid "Underscores.me"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://themeforest.net/user/layerdrops"
+msgstr ""
+
+#: 404.php:22
+msgid "error page image"
+msgstr ""
+
+#: 404.php:26
+msgid "Sorry We can&rsquo;t Find That Page!"
+msgstr ""
+
+#: 404.php:27
+msgid "The page you are looking for was moved, removed, renamed or never existed."
+msgstr ""
+
+#: 404.php:34
+msgid "Back to home"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:36
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:42
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:76
+msgid "Name *"
+msgstr ""
+
+#: comments.php:77
+msgid "Email *"
+msgstr ""
+
+#: comments.php:78
+msgid "Website (Optional)"
+msgstr ""
+
+#: comments.php:85
+msgid "Leave a Comment"
+msgstr ""
+
+#: comments.php:88
+msgid "Comment"
+msgstr ""
+
+#: functions.php:55
+msgid "Primary"
+msgstr ""
+
+#: functions.php:131
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:133
+msgid "Add widgets here."
+msgstr ""
+
+#. Translators: If there are characters in your language that are not supported by chosen font(s), translate this to 'off'. Do not translate into your own language.
+#: functions.php:154
+msgctxt "Google font: on or off"
+msgid "on"
+msgstr ""
+
+#: header.php:65
+msgid "Menu"
+msgstr ""
+
+#: inc/customizer.php:17
+msgid "Linoor Options"
+msgstr ""
+
+#: inc/customizer.php:18
+msgid "Linoor Theme options panel"
+msgstr ""
+
+#: inc/customizer.php:25
+msgid "General Settings"
+msgstr ""
+
+#: inc/customizer.php:26
+msgid "Linoor General Settings."
+msgstr ""
+
+#: inc/customizer.php:36
+msgid "Select Theme Base color"
+msgstr ""
+
+#: inc/customizer.php:46
+msgid "Select Theme Black color"
+msgstr ""
+
+#: inc/customizer.php:56
+msgid "Preloader Visibility"
+msgstr ""
+
+#: inc/customizer.php:67
+msgid "Back to top Visibility"
+msgstr ""
+
+#: inc/customizer.php:76
+msgid "Select Back to top icon"
+msgstr ""
+
+#: inc/customizer.php:99
+msgid "Custom 404 Image"
+msgstr ""
+
+#: inc/customizer.php:107
+msgid "Page Header Background Image"
+msgstr ""
+
+#: inc/customizer.php:119
+msgid "Header Settings"
+msgstr ""
+
+#: inc/customizer.php:120
+msgid "Linoor Header Settings."
+msgstr ""
+
+#: inc/customizer.php:131
+msgid "Add Logo size in px"
+msgstr ""
+
+#: inc/customizer.php:142
+msgid "Call Btn Visibility"
+msgstr ""
+
+#: inc/customizer.php:152
+msgid "Call Btn Text"
+msgstr ""
+
+#: inc/customizer.php:154
+msgid "Btn Text"
+msgstr ""
+
+#: inc/customizer.php:168
+msgid "Call Btn Number"
+msgstr ""
+
+#: inc/customizer.php:170
+msgid "666 888 0000"
+msgstr ""
+
+#: inc/customizer.php:185
+msgid "Call Btn Link"
+msgstr ""
+
+#: inc/customizer.php:205
+msgid "Stricky Header"
+msgstr ""
+
+#: inc/customizer.php:215
+msgid "Search Button Visibility"
+msgstr ""
+
+#: inc/customizer.php:220
+#: inc/customizer.php:234
+msgid "Enable"
+msgstr ""
+
+#: inc/customizer.php:221
+#: inc/customizer.php:235
+msgid "Disable"
+msgstr ""
+
+#: inc/customizer.php:229
+msgid "Breadcrumb Visibility"
+msgstr ""
+
+#: inc/customizer.php:245
+msgid "Mobile Menu Settings"
+msgstr ""
+
+#: inc/customizer.php:246
+msgid "Linoor Mobile Menu Settings."
+msgstr ""
+
+#: inc/customizer.php:254
+msgid "Mobile Menu Content"
+msgstr ""
+
+#: inc/customizer.php:256
+msgid "Lorem Ipsum is simply dummy text the printing and setting industry. Lorm Ipsum has been the industry"
+msgstr ""
+
+#: inc/customizer.php:262
+#: inc/customizer.php:281
+msgid "Select Social Icons"
+msgstr ""
+
+#: inc/customizer.php:267
+msgid "Social Icons"
+msgstr ""
+
+#: inc/customizer.php:269
+msgid "Add new Icon"
+msgstr ""
+
+#: inc/customizer.php:280
+msgid "Social Icon"
+msgstr ""
+
+#: inc/customizer.php:287
+msgid "Link Url"
+msgstr ""
+
+#: inc/customizer.php:288
+msgid "Add social profile links"
+msgstr ""
+
+#: inc/customizer.php:302
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/customizer.php:303
+msgid "Linoor Footer Settings."
+msgstr ""
+
+#: inc/customizer.php:312
+msgid "Enable Custom Footer"
+msgstr ""
+
+#: inc/customizer.php:322
+msgid "Select Footer Type"
+msgstr ""
+
+#: inc/customizer.php:339
+msgid "Text Control"
+msgstr ""
+
+#: inc/customizer.php:341
+msgid "&copy; All right reserved"
+msgstr ""
+
+#: inc/customizer.php:361
+msgid "Service Sidebar Menu"
+msgstr ""
+
+#: inc/customizer.php:362
+#: inc/customizer.php:401
+msgid "Linoor Service Sidebar Options."
+msgstr ""
+
+#: inc/customizer.php:375
+msgid "Menu Title"
+msgstr ""
+
+#: inc/customizer.php:377
+msgid "All Services"
+msgstr ""
+
+#: inc/customizer.php:388
+msgid "Add Nav Menu"
+msgstr ""
+
+#: inc/customizer.php:400
+msgid "Service Sidebar Contact"
+msgstr ""
+
+#: inc/customizer.php:414
+msgid "Contact Title"
+msgstr ""
+
+#: inc/customizer.php:416
+msgid "Need Linoor Help?"
+msgstr ""
+
+#: inc/customizer.php:426
+msgid "Contact Text"
+msgstr ""
+
+#: inc/customizer.php:428
+msgid "Default Text"
+msgstr ""
+
+#: inc/customizer.php:438
+msgid "Contact Number"
+msgstr ""
+
+#: inc/customizer.php:440
+msgid "666 888 000"
+msgstr ""
+
+#: inc/customizer.php:450
+msgid "Contact Number Link"
+msgstr ""
+
+#: inc/customizer.php:452
+#: inc/customizer.php:503
+msgid "#"
+msgstr ""
+
+#: inc/customizer.php:465
+msgid "Service Call to action"
+msgstr ""
+
+#: inc/customizer.php:466
+msgid "Service Details bottom call to action."
+msgstr ""
+
+#: inc/customizer.php:479
+msgid "Add Title"
+msgstr ""
+
+#: inc/customizer.php:481
+msgid "Default title"
+msgstr ""
+
+#: inc/customizer.php:491
+msgid "Button Label"
+msgstr ""
+
+#: inc/customizer.php:493
+msgid "button label"
+msgstr ""
+
+#: inc/customizer.php:501
+msgid "Button URL"
+msgstr ""
+
+#: inc/customizer.php:515
+msgid "Portfolio Archive"
+msgstr ""
+
+#: inc/customizer.php:528
+msgid "No. Of Post"
+msgstr ""
+
+#: inc/demo-import.php:12
+msgid "Please keep patients while importing sample data."
+msgstr ""
+
+#: inc/template-functions.php:57
+msgid "Our Blog"
+msgstr ""
+
+#: inc/template-functions.php:67
+msgid "Search result for: “"
+msgstr ""
+
+#: inc/template-functions.php:69
+msgid "Page Not Found"
+msgstr ""
+
+#: inc/template-functions.php:87
+msgid "Search here..."
+msgstr ""
+
+#. translators: %s: post date.
+#: inc/template-tags.php:32
+msgctxt "post date"
+msgid " %s"
+msgstr ""
+
+#. translators: %s: post author.
+#: inc/template-tags.php:49
+msgctxt "post author"
+msgid "%s"
+msgstr ""
+
+#. translators: %s: post title
+#: inc/template-tags.php:67
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:91
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of categories.
+#: inc/template-tags.php:94
+msgid "Posted in %1$s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:98
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of tags.
+#: inc/template-tags.php:101
+msgid "Tagged %1$s"
+msgstr ""
+
+#: index.php:75
+#: search.php:67
+#: template-parts/content.php:45
+msgid "Read More"
+msgstr ""
+
+#: library/linoor-wp-breadcrumb.php:22
+#: library/linoor-wp-breadcrumb.php:24
+msgid "Home"
+msgstr ""
+
+#: library/linoor-wp-breadcrumb.php:117
+msgid "Search"
+msgstr ""
+
+#: library/linoor-wp-breadcrumb.php:122
+msgid "404"
+msgstr ""
+
+#: single.php:51
+#: template-parts/content-page.php:26
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content-none.php:15
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
