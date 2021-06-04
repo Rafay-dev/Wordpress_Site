@@ -39,5 +39,18 @@ End of comment */
   margin-left: 80px;
   margin-right: 0px;
   padding-top: 15px !important;
+}
+
+#chooseUs_sec_about .feature-six__image img {
+    
+    width: 100% !important;
+	filter: brightness(100%);
+}
+#contactUs_section_contactPage .contact-section .info-block:nth-child(3) .inner-box{
+  padding-left: 30px !important;
+  padding-right: 20px !important;
+}
+.page-banner .image-layer{
+	filter: brightness(100%);
 }</style>
 <!-- end Simple Custom CSS and JS -->
