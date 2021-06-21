@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en-US">
+
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){const n=e[t];Object.defineProperty(e,t,{get:n||function(){},set:n=>{e["rocket"+t]=n}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mouseover","touchmove","touchstart","touchend","touchcancel","touchforcechange","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<title>About Us &#8211; Ingenious Labs</title><style id="rocket-critical-css">@font-face{font-family:'Flaticon';src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/flaticons/fonts/Flaticon.eot?aetdej);src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/flaticons/fonts/Flaticon.eot?aetdej#iefix) format('embedded-opentype'),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/flaticons/fonts/Flaticon.ttf?aetdej) format('truetype'),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/flaticons/fonts/Flaticon.woff?aetdej) format('woff'),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/flaticons/fonts/Flaticon.svg?aetdej#Flaticon) format('svg');font-weight:normal;font-style:normal;font-display:swap}[class*=" flaticon-"]{font-family:'Flaticon'!important;speak:never;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.flaticon-menu-2:before{content:"\f14e"}:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%}header,nav,section{display:block}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}h1,h2{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}ul{margin-top:0;margin-bottom:1rem}a{color:#007bff;text-decoration:none;background-color:transparent}img{vertical-align:middle;border-style:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}h1,h2{margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:2.5rem}h2{font-size:2rem}.navbar-collapse{-ms-flex-preferred-size:100%;flex-basis:100%;-ms-flex-positive:1;flex-grow:1;-ms-flex-align:center;align-items:center}@media (min-width:768px){.navbar-expand-md{-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-pack:start;justify-content:flex-start}.navbar-expand-md .navbar-collapse{display:-ms-flexbox!important;display:flex!important;-ms-flex-preferred-size:auto;flex-basis:auto}}.clearfix::after{display:block;clear:both;content:""}.justify-content-between{-ms-flex-pack:justify!important;justify-content:space-between!important}.fa,.fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1}.fa-angle-up:before{content:"\f106"}.fa-facebook:before{content:"\f09a"}@font-face{font-family:"Font Awesome 5 Brands";font-style:normal;font-weight:400;font-display:swap;src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.eot);src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.woff2) format("woff2"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.woff) format("woff"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.ttf) format("truetype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-brands-400.svg#fontawesome) format("svg")}.fab{font-family:"Font Awesome 5 Brands"}@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:400;font-display:swap;src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.eot);src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.woff2) format("woff2"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.woff) format("woff"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.ttf) format("truetype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-regular-400.svg#fontawesome) format("svg")}.fab{font-weight:400}@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:900;font-display:swap;src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.eot);src:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.woff2) format("woff2"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.woff) format("woff"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.ttf) format("truetype"),url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/fontawesome/webfonts/fa-solid-900.svg#fontawesome) format("svg")}.fa{font-family:"Font Awesome 5 Free"}.fa{font-weight:900}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:0.67em 0}a{background-color:transparent}img{border-style:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,*::before,*::after{box-sizing:inherit}html{box-sizing:border-box}body{color:#404040;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-size:1rem;line-height:1.5}h1,h2{clear:both}p{margin-bottom:1.5em}i{font-style:italic}body{background:#fff}ul{margin:0 0 1.5em 3em}ul{list-style:disc}img{height:auto;max-width:100%}a{color:#4169e1}a:visited{color:#800080}.page{margin:0 0 0em}*{margin:0px;padding:0px;border:none;outline:none;font-size:100%;line-height:inherit}:root{--thm-font:"Teko", sans-serif;--thm-b-font:"Rubik", sans-serif;--thm-base:#ffaa17;--thm-base-rgb:255, 170, 23;--thm-black:#222429;--thm-text:#686a6f}body{font-size:20px;color:var(--thm-text);line-height:1.8em;font-weight:300;background:#ffffff;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;font-family:var(--thm-font);top:0!important}a{text-decoration:none;color:var(--thm-base)}a:visited{text-decoration:none;outline:none}h1,h2{position:relative;font-weight:400;margin:0px 0px 20px;background:none;line-height:1.25em;font-family:var(--thm-font);color:var(--thm-black)}h1{font-size:140px}h2{font-size:70px}p{line-height:1.8em;margin:0 0 20px}::-webkit-input-placeholder{color:inherit}::-moz-input-placeholder{color:inherit}::-ms-input-placeholder{color:inherit}.page-wrapper{position:relative;margin:0 auto;width:100%;min-width:300px;z-index:9;overflow:hidden}.auto-container{position:static;max-width:1200px;padding:0px 15px;margin:0 auto}.preloader{position:fixed;left:0px;top:0px;width:100%;height:100%;z-index:999999;background-color:rgba(0,0,0,1);background-color:#1c1e22}.preloader .icon{position:fixed;left:0px;top:0px;width:100%;height:100%;z-index:5;background-color:#000;background-position:center center;background-repeat:no-repeat;background-image:url(http://www.ingenious-labs.com/wp-content/uploads/2021/06/preloader-min.gif)}img{display:inline-block;max-width:100%;height:auto}.fa{line-height:inherit}.scroll-to-top{position:fixed;right:20px;bottom:20px;width:44px;height:44px;color:var(--thm-black);font-size:14px;line-height:44px;border-radius:50%;text-align:center;z-index:100;background:var(--thm-base);display:none}.main-header{position:absolute;left:0;top:0;display:block;width:100%;z-index:9999;background:none}.main-header .header-upper{position:absolute;display:block;left:0;top:0;width:100%;background:none;border-bottom:1px solid rgba(255,255,255,0.1);z-index:1}.main-header .header-upper .inner-container{position:relative;display:block;padding:0px 60px}.main-header .header-upper .logo-box{position:relative;float:left;padding:40px 0px;margin-right:50px;z-index:7}.main-header .header-upper .logo-box .logo{position:relative;display:block}.main-header .header-upper .logo-box .logo img{position:relative;display:inline-block;max-width:100%;z-index:1}.main-header .other-links{position:relative;float:right;z-index:7}.main-header .other-links .link-box{position:relative;float:left;padding:34px 0px}.main-header .other-links .link-box .link{position:relative;display:block;padding-top:4px;text-transform:uppercase;letter-spacing:0.05em;padding-left:60px;color:#ffffff}.main-header .other-links .link-box .link .icon{position:absolute;left:0;top:0;width:44px;height:42px;background:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/images/icons/chat-icon.png) left center no-repeat}.main-header .other-links .link-box .sub-text{position:relative;display:block;font-size:14px;font-weight:500;line-height:18px}.main-header .other-links .link-box .number{position:relative;display:block;font-size:20px;font-weight:400;line-height:24px}.main-header .other-links .call-us{position:relative}.main-header .nav-outer{position:absolute;left:0;top:0;float:left;text-align:center;width:100%;z-index:5}.main-header .nav-outer .main-menu{position:relative;display:inline-block;vertical-align:middle}.main-menu .navbar-collapse{padding:0px;display:block!important}.main-menu .navbar-collapse ul{margin:0;padding:0;list-style:none}.main-menu .navigation{position:relative;display:block;width:100%;margin:0px;font-family:var(--thm-font)}.main-menu .navigation>li{position:relative;float:left;padding:30px 0px;margin-right:40px}.main-menu .navigation>li:last-child{margin-right:0px}.main-menu .navigation>li:last-child:after{display:none}.main-menu .navigation>li>a{position:relative;display:block;text-align:center;font-size:20px;line-height:30px;font-weight:400;text-transform:uppercase;letter-spacing:0.03em;color:#ffffff;padding:12px 0px;opacity:1}.main-menu .navigation li>a{display:flex!important;align-items:center;justify-content:space-between}.main-menu .navigation>li.current_page_item>a{color:#ffffff}.main-menu .navigation>li>a:before{content:"";position:absolute;left:0;bottom:7px;width:100%;border-bottom:2px solid var(--thm-base);transform:scaleX(0)}.main-menu .navigation>li.current-menu-item>a:before,.main-menu .navigation>li.current_page_item>a:before{transform:scale(1)}.nav-outer .mobile-nav-toggler{position:relative;float:right;font-size:30px;line-height:40px;margin-left:0px;color:var(--thm-base);margin:40px 0px 0px;display:none}.mobile-nav-toggler .txt{position:relative;display:inline-block;vertical-align:top;padding-left:10px;font-size:16px;text-transform:capitalize;font-weight:500;display:none}.page-banner{position:relative;padding:0;color:#ffffff;background:var(--thm-black);background-position:center top;background-repeat:no-repeat;background-size:cover}.page-banner .image-layer{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0.4;z-index:0;background-repeat:no-repeat;background-position:center center;background-size:cover;-webkit-filter:grayscale(100%);-ms-filter:grayscale(100%);-moz-filter:grayscale(100%)}.page-banner .shape-1{position:absolute;right:0;top:0;width:250px;max-width:100%;height:100%;background:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/images/background/b-shape-1.png) right bottom no-repeat;z-index:1}.page-banner .shape-2{position:absolute;right:0;top:0;width:250px;max-width:100%;height:100%;background:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/images/background/b-shape-2.png) right top no-repeat;z-index:1}.page-banner .banner-inner{position:relative;display:block;text-align:center;z-index:3}.page-banner .inner-container{position:relative;padding:240px 0px 120px}.page-banner h1{position:relative;font-size:100px;color:#ffffff;line-height:0.9em;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin:0;word-break:break-all}.page-banner .page-nav{position:relative;padding-top:5px;text-align:center}.page-banner .bread-crumb{position:relative;display:inline-block;margin:0;padding:0;list-style:none}.page-banner .bread-crumb li{position:relative;float:left;font-size:20px;line-height:30px;color:#ccd6df;font-weight:400;text-transform:uppercase;letter-spacing:1px;padding-right:15px;margin-right:15px}.page-banner .bread-crumb li:before{position:absolute;right:-15px;width:30px;text-align:center;font-size:20px;line-height:30px;font-weight:400;content:"-"}.page-banner .bread-crumb li:last-child{padding-right:0;margin-right:0}.page-banner .bread-crumb li:last-child:before{display:none}.page-banner .bread-crumb li a{color:#ffffff;font-weight:400}.page-banner .bread-crumb li.active{color:var(--thm-base)}.side-menu__block{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;transform:translateX(-100%);-webkit-transform-origin:left center;transform-origin:left center;visibility:hidden}.side-menu__block-overlay{width:100%;height:100%;background-color:var(--thm-black);position:absolute;top:0;left:0;right:0;bottom:0;z-index:999;opacity:0.7}.side-menu__block-inner{position:absolute;left:0;top:0;width:100%;max-width:400px;height:100%;overflow-y:auto;background-color:var(--thm-black);z-index:999999;padding:40px 0;padding-top:40px;opacity:0;visibility:hidden;transform:translateX(-100%)}@media (max-width:375px){.side-menu__block-inner{max-width:300px}}.side-menu__top{display:flex;align-items:center;justify-content:space-between;padding-left:30px;padding-right:30px}.side-menu__close-btn{background-image:url(http://www.ingenious-labs.com/wp-content/themes/linoor/assets/images/icons/close-2-1.png);width:17px;height:17px;background-repeat:no-repeat;background-position:center center}.mobile-nav__container{padding-left:30px;padding-right:30px;padding-top:40px}.side-menu__social{display:flex;align-items:center;margin-top:30px;margin-bottom:40px}.side-menu__social a{display:flex;align-items:center;justify-content:center;text-align:center;width:57px;height:57px;background-color:#1c1e22;color:#999b9f;font-size:16px;border-radius:50%}.side-menu__content{padding-left:30px;padding-right:30px}.side-menu__content p{margin:0;font-size:20px;line-height:30px;font-weight:400;color:#999b9f;letter-spacing:0.05em;font-size:16px;line-height:34px;font-family:var(--thm-b-font);letter-spacing:0;font-weight:400}.side-menu__content p+p{margin-top:30px}.side-menu__content p a{color:#fff}.side-menu__sep{width:calc(100% - 60px);margin-left:auto;margin-right:auto;height:1px;background-color:#fff;opacity:0.1;margin-top:20px;margin-bottom:30px}@media (max-width:480px){.side-menu__top,.side-menu__content,.mobile-nav__container{padding-left:25px;padding-right:25px}.side-menu__sep{width:calc(100% - 50px)}.side-menu__social{margin-top:40px}.side-menu__social a{width:45px;height:45px}}@media only screen and (max-width:7000px){.page-wrapper{overflow:hidden}}@media only screen and (max-width:1499px){.main-header .header-upper .inner-container{padding-left:20px;padding-right:20px}}@media only screen and (max-width:1199px){.main-header .other-links .link-box{display:none}.main-menu .navigation>li{margin-right:30px}.main-header .nav-outer .main-menu{display:none!important}.main-header .nav-outer{float:right;position:relative;width:auto;height:auto;padding:0}.nav-outer .mobile-nav-toggler{display:block}.page-banner h1{font-size:70px;line-height:1em}}@media only screen and (max-width:991px){.page-banner .inner-container{padding:220px 0px 100px}.page-banner h1{font-size:60px;line-height:1.05em}.page-banner .shape-1,.page-banner .shape-2{display:none}.page-banner .inner-container{padding:180px 0px 50px}}@media only screen and (max-width:767px){.page-banner h1{font-size:48px}}@media only screen and (max-width:599px){.page-banner h1{font-size:48px;line-height:1.1em}.page-banner .bread-crumb li{margin:0 7px!important}}@media only screen and (max-width:479px){.page-banner h1{font-size:42px}}.elementor{-webkit-hyphens:manual;-ms-hyphens:manual;hyphens:manual}.elementor *,.elementor :after,.elementor :before{-webkit-box-sizing:border-box;box-sizing:border-box}.elementor img{height:auto;max-width:100%;border:none;-webkit-border-radius:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none}:root{--page-title-display:block}.elementor-section{position:relative}.elementor-section .elementor-container{display:-webkit-box;display:-ms-flexbox;display:flex;margin-right:auto;margin-left:auto;position:relative}@media (max-width:1024px){.elementor-section .elementor-container{-ms-flex-wrap:wrap;flex-wrap:wrap}}.elementor-section.elementor-section-boxed>.elementor-container{max-width:1140px}.elementor-widget-wrap{position:relative;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-line-pack:start;align-content:flex-start}.elementor:not(.elementor-bc-flex-widget) .elementor-widget-wrap{display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-widget-wrap>.elementor-element{width:100%}.elementor-widget{position:relative}.elementor-widget:not(:last-child){margin-bottom:20px}.elementor-column{min-height:1px}.elementor-column{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-column-gap-default>.elementor-column>.elementor-element-populated{padding:10px}@media (min-width:768px){.elementor-column.elementor-col-100{width:100%}}@media (max-width:767px){.elementor-column{width:100%}}.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-image{text-align:center}.elementor-widget-image img{vertical-align:middle;display:inline-block}.elementor-kit-1135{--e-global-color-primary:#6EC1E4;--e-global-color-secondary:#54595F;--e-global-color-text:#7A7A7A;--e-global-color-accent:#61CE70;--e-global-typography-primary-font-family:"Roboto";--e-global-typography-primary-font-weight:600;--e-global-typography-secondary-font-family:"Roboto Slab";--e-global-typography-secondary-font-weight:400;--e-global-typography-text-font-family:"Roboto";--e-global-typography-text-font-weight:400;--e-global-typography-accent-font-family:"Roboto";--e-global-typography-accent-font-weight:500}.elementor-section.elementor-section-boxed>.elementor-container{max-width:1140px}.elementor-widget:not(:last-child){margin-bottom:20px}@media (max-width:1024px){.elementor-section.elementor-section-boxed>.elementor-container{max-width:1024px}}@media (max-width:767px){.elementor-section.elementor-section-boxed>.elementor-container{max-width:767px}}.elementor-widget-heading .elementor-heading-title{color:var(--e-global-color-primary);font-family:var(--e-global-typography-primary-font-family),Sans-serif;font-weight:var(--e-global-typography-primary-font-weight)}.elementor-1437 .elementor-element.elementor-element-7506884{text-align:center}.elementor-1437 .elementor-element.elementor-element-7506884 .elementor-heading-title{color:#222429;font-family:"Teko",Sans-serif;font-weight:400}.elementor-1437 .elementor-element.elementor-element-7506884>.elementor-widget-container{margin:50px 0px 0px 0px}.elementor-1437 .elementor-element.elementor-element-c3cfdb9{text-align:center}.elementor-1437 .elementor-element.elementor-element-c3cfdb9 .elementor-heading-title{color:#FFFFFF;font-family:"Teko",Sans-serif;font-weight:400}.elementor-1437 .elementor-element.elementor-element-c3cfdb9>.elementor-widget-container{padding:50px 0px 50px 0px;background-image:url("http://www.ingenious-labs.com/wp-content/uploads/2021/01/we-do-section-bg-dark.jpg")}</style><link rel="preload" href="https://fonts.googleapis.com/css?family=Rubik%3A300%2C400%2C700%7CTeko%3A300%2C400%2C500%2C600%2C700%26amp%3Bsubset%3Dlatin%2Clatin-ext%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CTeko%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRubik%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Ingenious Labs &raquo; Feed" href="http://www.ingenious-labs.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="Ingenious Labs &raquo; Comments Feed" href="http://www.ingenious-labs.com/comments/feed" />
+<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='preload'   href='http://www.ingenious-labs.com/wp-includes/css/dist/block-library/style.min.css?ver=5.7.2' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/owl-carousel/owl.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/jarallax/jarallax.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/animate/animate.min.css?ver=1622074568' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jquery-fancybox/jquery.fancybox.min.css?ver=1622074568' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/jquery-ui/jquery-ui.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/vendors/flaticons/css/flaticon.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/bootstrap/css/bootstrap.min.css?ver=4.5.3' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/vendors/fontawesome/css/all.min.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/style.css?ver=1623056364' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/css/linoor-main.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<style id='linoor-main-inline-css'>
+:root {--thm-base: #ffaa17; --thm-black: #222429; }.page-banner .image-layer { background-image: url(http://www.ingenious-labs.com/wp-content/uploads/2021/06/qzudUV.jpg); } :root {--thm-base: #ffaa17; --thm-black: #222429; }.page-banner .image-layer { background-image: url(http://www.ingenious-labs.com/wp-content/uploads/2021/06/qzudUV.jpg); }
+</style>
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/css/linoor-responsive.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor-child/style.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.2.3' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.2.3' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<style id='elementor-frontend-inline-css'>
+@font-face{font-family:eicons;src:url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0);src:url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0#iefix) format("embedded-opentype"),url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff2?5.10.0) format("woff2"),url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff?5.10.0) format("woff"),url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.ttf?5.10.0) format("truetype"),url(http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.svg?5.10.0#eicon) format("svg");font-weight:400;font-style:normal}
+</style>
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-1135.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link rel='preload'   href='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/css/frontend.min.css?ver=3.2.2' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/global.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-845.css?ver=1623056368' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/smart-recent-posts-widget/assets/css/srpw-frontend.css?ver=1623056365' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/jquery/jquery.min.js?ver=3.5.1' id='jquery-core-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js' defer></script>
+<link rel="https://api.w.org/" href="http://www.ingenious-labs.com/wp-json/" /><link rel="alternate" type="application/json" href="http://www.ingenious-labs.com/wp-json/wp/v2/pages/845" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.ingenious-labs.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.ingenious-labs.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.7.2" />
+<link rel="canonical" href="http://www.ingenious-labs.com/about" />
+<link rel='shortlink' href='http://www.ingenious-labs.com/?p=845' />
+<link rel="alternate" type="application/json+oembed" href="http://www.ingenious-labs.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.ingenious-labs.com%2Fabout" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.ingenious-labs.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.ingenious-labs.com%2Fabout&#038;format=xml" />
+<!-- start Simple Custom CSS and JS -->
+<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+/* Default comment here */ 
+
+//$(document).ready(function( ){
+//  alert(1);
+//    $("#more_products_btn").html('<div class="link-box"><a class="theme-btn btn-style-two" href="http://layerdrops.com/linoorwp/contact-us/"><i class="btn-curve"></i><span class="btn-title">Contact with us</span></a></div>');
+//});
+jQuery(document).ready(function( $ ){
+    // Your code in here
+  $("#more_products_btn").html('<div class="link-box"><a class="theme-btn btn-style-one" href="#"><i class="btn-curve"></i><span id="more_prod_btn_txt" class="btn-title">Discover More</span></a></div>');
+  $("#more_prod_btn_txt").html("Show More Products");
+  $("#mapDiv").addClass("hide");
+  $("#mapDiv .place-card-large .place-name").html("IngeniousLabs");
+  $("#more_products_btn a").attr("href", "http://www.ingenious-labs.com/our-products")
+});
+});</script>
+<!-- end Simple Custom CSS and JS -->
+<!-- start Simple Custom CSS and JS -->
+<style>
+/* Add your CSS code here.
+
+For example:
+.example {
+    color: red;
+}
+
+For brushing up on your CSS knowledge, check out http://www.w3schools.com/css/css_syntax.asp
+
+End of comment */
+#services-section .default-tabs li.tab-btn{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  font-size: 13px !important;
+}
+.txt-left{
+  text-align: left !important;
+}
+.txt-right{
+  text-align: right !important;
+}
+.txt-cen{
+  text-align: center !important;
+}
+.txt-justify{
+  text-align: justify !important;
+}
+.main-footer .logo-widget .logo img{
+  width: 160px !important;
+  height: auto !important;
+}
+
+.main-footer .logo-widget .logo{
+  margin-bottom: 10px !important;
+}
+.header-upper .logo-box{
+  margin-left: 80px;
+  margin-right: 0px;
+  padding-top: 15px !important;
+}
+
+#chooseUs_sec_about .feature-six__image img {
+    
+    width: 100% !important;
+	filter: brightness(100%);
+}
+#contactUs_section_contactPage .contact-section .info-block:nth-child(3) .inner-box{
+  padding-left: 30px !important;
+  padding-right: 20px !important;
+}
+.page-banner .image-layer{
+	filter: brightness(100%);
+}</style>
+<!-- end Simple Custom CSS and JS -->
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><style id="kirki-inline-styles"></style><script type="rocketlazyloadscript">
+/*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+(function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(){}}
+var rp=loadCSS.relpreload={};rp.support=(function(){var ret;try{ret=w.document.createElement("link").relList.supports("preload")}catch(e){ret=!1}
+return function(){return ret}})();rp.bindMediaToggle=function(link){var finalMedia=link.media||"all";function enableStylesheet(){link.media=finalMedia}
+if(link.addEventListener){link.addEventListener("load",enableStylesheet)}else if(link.attachEvent){link.attachEvent("onload",enableStylesheet)}
+setTimeout(function(){link.rel="stylesheet";link.media="only x"});setTimeout(enableStylesheet,3000)};rp.poly=function(){if(rp.support()){return}
+var links=w.document.getElementsByTagName("link");for(var i=0;i<links.length;i++){var link=links[i];if(link.rel==="preload"&&link.getAttribute("as")==="style"&&!link.getAttribute("data-loadcss")){link.setAttribute("data-loadcss",!0);rp.bindMediaToggle(link)}}};if(!rp.support()){rp.poly();var run=w.setInterval(rp.poly,500);if(w.addEventListener){w.addEventListener("load",function(){rp.poly();w.clearInterval(run)})}else if(w.attachEvent){w.attachEvent("onload",function(){rp.poly();w.clearInterval(run)})}}
+if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}
+else{w.loadCSS=loadCSS}}(typeof global!=="undefined"?global:this))
+</script></head>
+
+<body class="page-template page-template-elementor_header_footer page page-id-845 wp-custom-logo elementor-default elementor-template-full-width elementor-kit-1135 elementor-page elementor-page-845">
+	
+				<!-- Preloader -->
+		<div class="preloader">
+			<div class="icon"></div>
+		</div>
+	
+	
+	<div class="page-wrapper ">
+		<div id="page" class="site">
+
+
+
+			
+
+			<!-- theme header -->
+			
+
+
+    <!-- Main Header -->
+        <header class="main-header header-style-one sticky-menu">
+
+        <!-- Header Upper -->
+        <div class="header-upper">
+            <div class="inner-container clearfix">
+                <!--Logo-->
+                <div class="logo-box">
+                    <div class="logo">
+                        <a href="http://www.ingenious-labs.com/">
+                            <img width="133" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/cropped-cropped-logo2.png" alt="Ingenious Labs">                        </a>
+                    </div>
+                </div>
+                <div class="nav-outer clearfix">
+                    <!--Mobile Navigation Toggler-->
+                    <div class="mobile-nav-toggler"><span class="icon flaticon-menu-2"></span><span class="txt">Menu</span></div>
+
+                    <!-- Main Menu -->
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <div class="menu-main-menu-container"><ul id="primary-menu" class="navigation clearfix"><li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-169"><a href="http://www.ingenious-labs.com/">Home</a></li>
+<li id="menu-item-870" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-845 current_page_item menu-item-870"><a href="http://www.ingenious-labs.com/about" aria-current="page">About Us</a></li>
+<li id="menu-item-1471" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1471"><a href="http://www.ingenious-labs.com/our-products">Our Products</a></li>
+<li id="menu-item-178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a href="http://www.ingenious-labs.com/all-services">Our Services</a></li>
+<li id="menu-item-167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a href="http://www.ingenious-labs.com/contact-us">Contact Us</a></li>
+</ul></div>                        </div>
+                    </nav>
+                </div>
+
+                <div class="other-links clearfix">
+                    <!--Search Btn-->
+                                        
+                                                                <div class="link-box">
+                            <div class="call-us">
+                                <a class="link" href="tel:+922134542490">
+                                    <span class="icon"></span>
+                                    <span class="sub-text">Call Anytime</span>
+                                    <span class="number">+92 213 454 2490</span>
+                                </a>
+                            </div>
+                        </div>
+                                    </div>
+
+            </div>
+        </div>
+        <!--End Header Upper-->
+
+
+    </header>
+    <!-- End Main Header -->
+
+    <!--Search Popup-->
+    <div class="search-popup">
+        <div class="search-popup__overlay">
+        </div><!-- /.search-popup__overlay -->
+        <div class="search-popup__inner">
+            <form role="search" method="get" class="searchform" action="http://www.ingenious-labs.com/" >
+        <input type="text" value="" name="s" placeholder="Search here...">
+        <button type="submit"><i class="icon flaticon-magnifying-glass-1"></i></button>
+    </form>        </div><!-- /.search-popup__inner -->
+    </div><!-- /.search-popup -->
+
+
+    <!--Mobile Menu-->
+    <div class="side-menu__block">
+        <div class="side-menu__block-overlay">
+        </div><!-- /.side-menu__block-overlay -->
+        <div class="side-menu__block-inner ">
+            <div class="side-menu__top justify-content-between">
+                <div class="logo">
+                    <a href="http://www.ingenious-labs.com/">
+                        <img width="133" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/cropped-cropped-logo2.png" alt="Ingenious Labs">                    </a>
+                </div>
+                <a href="#" class="side-menu__toggler side-menu__close-btn"></a>
+            </div><!-- /.side-menu__top -->
+
+
+            <nav class="mobile-nav__container">
+                <!-- content is loading via js -->
+            </nav>
+                                        <div class="side-menu__sep"></div><!-- /.side-menu__sep -->
+                        <div class="side-menu__content">
+                                                        <p>Brings together integrity, years of experience, and exceptional customer-driven service to provide state-of-the-art Embedded Systems Development Solutions across all industry sectors.</p>
+                    <p><a href="mailto:info@ingeious-labs.com">info@ingeious-labs.com</a> <br> <a href="tel:+922134542490">+9221 3454 2490</a></p>
+                                                   <div class="side-menu__social">
+                                                                                            <a href="#"><i class="fab fa-facebook"></i></a>
+                                                            </div>
+            </div><!-- /.side-menu__content -->
+        </div><!-- /.side-menu__block-inner -->
+    </div><!-- /.side-menu__block -->
+
+
+                <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+    
+
+							
+<!-- Banner Section -->
+<section class="page-banner">
+    <div class="image-layer"></div>
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                                <h1>
+                                            About Us                                    </h1>
+
+                
+                                    <div class="page-nav">
+                        <ul class="bread-crumb clearfix"><li class="thm-breadcrumb__item"><a href="http://www.ingenious-labs.com">Home</a></li><li class="thm-breadcrumb__item active"><span>About Us</span></li></ul>                    </div>
+                            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->					<div data-elementor-type="wp-page" data-elementor-id="845" class="elementor elementor-845" data-elementor-settings="[]">
+							<div class="elementor-section-wrap">
+							<section class="elementor-section elementor-top-section elementor-element elementor-element-97f1605 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="97f1605" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7eb57f6" data-id="7eb57f6" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-48f22ba elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="48f22ba" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-822ce6f" data-id="822ce6f" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-b1b805e elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b1b805e" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-d42eae5" data-id="d42eae5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-9e9702f elementor-widget elementor-widget-heading" data-id="9e9702f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-xxl">Next Generation <br>Embedded Systems Development Solutions</h1>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-e5fe59e" data-id="e5fe59e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-9d42071 elementor-widget elementor-widget-image" data-id="9d42071" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="1024" height="385" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-1024x385.jpg" class="attachment-large size-large" alt="" loading="lazy" srcset="http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-1024x385.jpg 1024w, http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-300x113.jpg 300w, http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-768x289.jpg 768w, http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-570x214.jpg 570w, http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn-380x143.jpg 380w, http://www.ingenious-labs.com/wp-content/uploads/2021/06/yeRdgn.jpg 1170w" sizes="(max-width: 1024px) 100vw, 1024px" />															</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-f4c484e elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f4c484e" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a48158e" data-id="a48158e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-0ff9e71 elementor-widget elementor-widget-text-editor" data-id="0ff9e71" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<p>At Ingenious Labs, we leverage years of experience and an exceptional track record to provide next-generation Embedded Systems Development Solutions to companies across industries.</p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2c6e5f0" data-id="2c6e5f0" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-744610a elementor-widget elementor-widget-text-editor" data-id="744610a" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								We rely on a blend of state-of-the-art software and robust hardware to provide future-savvy businesses with an edge and fully cater to our clients’ data acquisition and control systems needs.						</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-49d7720 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="49d7720" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-67ea8d0" data-id="67ea8d0" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-31e18c3 elementor-widget elementor-widget-text-editor" data-id="31e18c3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								Thanks to our background in fleet management, textile mills, test laboratories, and hospitals, our staff can confidently aid at every stage of the project implementation process from measurement techniques to high-level management reporting.
+Ingenious Labs offers services spanning over the full life cycle of our solution&#8217;s from the initial product ideas all the way through development, maintenance, and future upgrades and additions.						</div>
+				</div>
+				<div class="elementor-element elementor-element-d502b18 elementor-widget elementor-widget-text-editor" data-id="d502b18" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								At Ingenious Labs, we are well-versed in developing commercial solution&#8217;s that cater to entire business sectors rather than individual companies. Through our extensive partnerships with the leaders in the industry, we can deliver a comprehensive solution&#8217;s with a general application within your field of
+operation. In this way, we can maintain our expenses low and ensure all of our participating clients can take advantage of our cutting-edge solutions.						</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-b1d1efe elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="b1d1efe" data-element_type="section" id="chooseUs_sec_about">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-22f7f73" data-id="22f7f73" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7c79c19 elementor-widget elementor-widget-linoor-featured" data-id="7c79c19" data-element_type="widget" data-widget_type="linoor-featured.default">
+				<div class="elementor-widget-container">
+			
+        
+        
+        
+
+        
+        
+                    <section class="feature-six">
+                <div class="auto-container">
+                    <div class="row no-gutters">
+                        <div class="col-md-12 col-lg-12 col-xl-6">
+                            <div class="feature-six__image clearfix">
+                                <img src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/dlTvTO-e1622811020326.jpg" alt="Only limit is 
+our clients’ needs.">
+                                <div class="feature-six__image__caption">Only limit is 
+our clients’ needs.</div><!-- /.feature-six__image__caption -->
+                            </div><!-- /.feature-six__image -->
+                        </div><!-- /.col-md-12 col-lg-6 -->
+                        <div class="col-md-12 col-lg-12 col-xl-6 d-flex">
+                            <div class="my-auto">
+
+                                <div class="feature-six__content">
+                                                                            <div class="sec-title">
+                                            <h2>Why choose us</h2>
+                                        </div>
+                                                                        <div class="feature-six__content__text">
+                                        We stand proud behind our name: at Ingenious Labs, we are working around the clock to masterfully combine best-in-class hardware and software to provide our clients with cutting-edge in-house solution's. Combined with our extensive technical background, unrivaled industry partnerships, and meticulous attention to detail, we successfully maintain a client-centric approach with tangible results.                                    </div><!-- /.feature-six__content__text -->
+                                                                        <ul class="m-0 list-unstyled feature-six__list">
+                                                                                    <li class="feature-six__list__item">
+                                                <i class="flaticon-check-symbol"></i>
+                                                In-Depth Understanding of Our Solutions                                            </li>
+                                                                                    <li class="feature-six__list__item">
+                                                <i class="flaticon-check-symbol"></i>
+                                                Uniquely Tailor and Customize Our Embedded Solutions                                            </li>
+                                                                                    <li class="feature-six__list__item">
+                                                <i class="flaticon-check-symbol"></i>
+                                                Development, Maintenance, Future Upgrades &amp; Additions                                            </li>
+                                                                            </ul>
+                                </div><!-- /.feature-six__content -->
+                            </div><!-- /.my-auto -->
+                        </div><!-- /.col-md-12 col-lg-6 -->
+                    </div><!-- /.row -->
+                </div><!-- /.auto-container -->
+            </section><!-- /.feature-six -->
+
+        
+        
+
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-e227ecb elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="e227ecb" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-34ef3a1" data-id="34ef3a1" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-8e1b589 elementor-widget elementor-widget-linoor-featured" data-id="8e1b589" data-element_type="widget" data-widget_type="linoor-featured.default">
+				<div class="elementor-widget-container">
+			
+        
+        
+        
+
+        
+        
+        
+                    <section class="feature-seven">
+                <div class="auto-container">
+                                            <div class="sec-title centered">
+                            <h2>Our Products</h2>
+                        </div>
+                                        <div class="row">
+                                                    <div class="col-md-12 col-lg-4">
+                                <div class="feature-seven-card">
+                                    <div class="feature-seven-card__inner">
+                                        <div class="feature-seven-card__image">
+                                            <img width="370" height="254" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/CaEXDZ-370x254.jpg" class="img-fluid" alt="" loading="lazy" />                                        </div><!-- /.feature-seven-card__image -->
+                                        <div class="feature-seven-card__content">
+                                            <h3 class="feature-seven-card__title">
+                                                <a href="http://www.ingenious-labs.com/our-products#sec_emb_prod">Embedded Textile Framework</a>
+                                            </h3>
+                                            <p class="feature-seven-card__text">
+                                                The textile industry is a highly versatile industry with a plethora of features that distinguish from most other manufacturing sectors...                                            </p>
+                                        </div><!-- /.feature-seven-card__content -->
+                                    </div><!-- /.feature-seven-card__inner -->
+                                </div><!-- /.feature-seven-card -->
+                            </div><!-- /.col-md-12 -->
+                                                    <div class="col-md-12 col-lg-4">
+                                <div class="feature-seven-card">
+                                    <div class="feature-seven-card__inner">
+                                        <div class="feature-seven-card__image">
+                                            <img width="370" height="254" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/foDsaG-370x254.jpg" class="img-fluid" alt="" loading="lazy" />                                        </div><!-- /.feature-seven-card__image -->
+                                        <div class="feature-seven-card__content">
+                                            <h3 class="feature-seven-card__title">
+                                                <a href="http://www.ingenious-labs.com/our-products#sec_health_prod">Isolated Healthcare Monitoring Chamber </a>
+                                            </h3>
+                                            <p class="feature-seven-card__text">
+                                                Monitoring the health of patients without the need for direct physical contact is a game-changer for the medical field...                                            </p>
+                                        </div><!-- /.feature-seven-card__content -->
+                                    </div><!-- /.feature-seven-card__inner -->
+                                </div><!-- /.feature-seven-card -->
+                            </div><!-- /.col-md-12 -->
+                                                    <div class="col-md-12 col-lg-4">
+                                <div class="feature-seven-card">
+                                    <div class="feature-seven-card__inner">
+                                        <div class="feature-seven-card__image">
+                                            <img width="370" height="254" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/DiEXuf-370x254.jpg" class="img-fluid" alt="" loading="lazy" />                                        </div><!-- /.feature-seven-card__image -->
+                                        <div class="feature-seven-card__content">
+                                            <h3 class="feature-seven-card__title">
+                                                <a href="http://www.ingenious-labs.com/our-products#sec_track_prod">Satellite Vehicle Tracking System</a>
+                                            </h3>
+                                            <p class="feature-seven-card__text">
+                                                Ingenious Labs, we try to brings high-end technology to introduce a brand-new approach to Vehicle Monitoring...                                            </p>
+                                        </div><!-- /.feature-seven-card__content -->
+                                    </div><!-- /.feature-seven-card__inner -->
+                                </div><!-- /.feature-seven-card -->
+                            </div><!-- /.col-md-12 -->
+                                            </div><!-- /.row -->
+                </div><!-- /.auto-container -->
+            </section><!-- /.feature-seven -->
+        
+
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-7e1fed8 elementor-button-warning elementor-align-center elementor-widget elementor-widget-button" data-id="7e1fed8" data-element_type="widget" id="more_products_btn" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="http://www.ingenious-labs.com/our-products" class="elementor-button-link elementor-button elementor-size-sm" role="button" id="btn_more_products">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">See More Products</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-e3f90b9 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="e3f90b9" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8dd7d43" data-id="8dd7d43" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-74a52c9 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="74a52c9" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-0a379a6 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="0a379a6" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-76e9bdb" data-id="76e9bdb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-9cd28a7 elementor-widget elementor-widget-linoor-call-to-action" data-id="9cd28a7" data-element_type="widget" data-widget_type="linoor-call-to-action.default">
+				<div class="elementor-widget-container">
+			
+        
+        
+        
+        
+        
+            <!-- Call To Section -->
+            <section class="call-to-section-two alternate">
+                <div class="auto-container">
+                    <div class="inner clearfix">
+                        <h2>We’re Ready to Bring Bigger <br>&amp; Stronger Projects</h2>
+                        <div class="link-box">
+                            <a class="theme-btn btn-style-two" href="http://www.ingenious-labs.com/contact-us">
+                                <i class="btn-curve"></i>
+                                <span class="btn-title">Contact with us</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+        
+
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+						</div>
+					</div>
+		
+
+
+
+	
+                    <!-- the loop -->
+                            		<div data-elementor-type="wp-post" data-elementor-id="34" class="elementor elementor-34" data-elementor-settings="[]">
+							<div class="elementor-section-wrap">
+							<section class="elementor-section elementor-top-section elementor-element elementor-element-4b46e30 elementor-section-full_width main-footer elementor-section-height-default elementor-section-height-default" data-id="4b46e30" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-928c808" data-id="928c808" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-cf7c7a2 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="cf7c7a2" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-extended">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-00f1e8b" data-id="00f1e8b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-041ad59 elementor-widget elementor-widget-footer-about" data-id="041ad59" data-element_type="widget" data-widget_type="footer-about.default">
+				<div class="elementor-widget-container">
+			        <div class="footer-widget logo-widget">
+            <div class="widget-content">
+                <div class="logo">
+                    <a href="http://www.ingenious-labs.com/"><img id="fLogo" src="http://www.ingenious-labs.com/wp-content/uploads/2021/06/cropped-logo3.png" alt="Ingenious Labs" /></a>
+                </div>
+                <div class="text">Brings together integrity, years of experience, and exceptional
+customer-driven service to provide state-of-the-art Embedded Systems Development Solutions across
+all industry sectors.</div>
+                <ul class="social-links clearfix list-unstyled m-0">
+                                            <li><a href="http://facebook.com"><span class="fab fa-facebook-square"></span></a></li>
+                                    </ul>
+            </div>
+        </div>
+		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-cb036f9" data-id="cb036f9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-37e16df elementor-widget elementor-widget-footer-nav-menu" data-id="37e16df" data-element_type="widget" data-widget_type="footer-nav-menu.default">
+				<div class="elementor-widget-container">
+			        <div class="footer-widget links-widget">
+            <div class="widget-content">
+                <h6>Explore</h6>
+                <div class="row clearfix">
+                                            <div class="col-md-6 col-sm-12">
+                            <div class="menu-main-menu-container"><ul id="menu-main-menu" class="list-unstyled m-0"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-169"><a href="http://www.ingenious-labs.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-845 current_page_item menu-item-870"><a href="http://www.ingenious-labs.com/about" aria-current="page">About Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1471"><a href="http://www.ingenious-labs.com/our-products">Our Products</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a href="http://www.ingenious-labs.com/all-services">Our Services</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a href="http://www.ingenious-labs.com/contact-us">Contact Us</a></li>
+</ul></div>                        </div>
+                                    </div>
+            </div>
+        </div>
+		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-36def59" data-id="36def59" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3d28c27 elementor-widget elementor-widget-footer-contact" data-id="3d28c27" data-element_type="widget" data-widget_type="footer-contact.default">
+				<div class="elementor-widget-container">
+			        <div class="footer-widget info-widget">
+            <div class="widget-content">
+                <h6>Contact</h6>
+                <ul class="contact-info m-0 list-unstyled">
+                                            <li class="address">
+                            <span class="icon flaticon-pin-1"></span>
+                            B 22, MCHS, Ghazi Salahuddin Raod, Karachi 75350, Pakistan                        </li>
+                                            <li class="address">
+                            <span class="icon flaticon-pin-1"></span>
+                            10068 NANTUCKET DR SAN RAMON, CA 94582-2864, United States                        </li>
+                                            <li class="address">
+                            <span class="icon flaticon-call"></span>
+                            <a href="tel:+922134542490">+922134542490</a>                        </li>
+                                            <li class="address">
+                            <span class="icon flaticon-email-2"></span>
+                            <a href="mailto:info@ingenious-labs.com">info@ingenious-labs.com</a>                        </li>
+                                    </ul>
+            </div>
+        </div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-a4443f5 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="a4443f5" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-extended">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-54aa0f9" data-id="54aa0f9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-34a4d38 elementor-widget elementor-widget-footer-copyright" data-id="34a4d38" data-element_type="widget" data-widget_type="footer-copyright.default">
+				<div class="elementor-widget-container">
+			        <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="inner clearfix">
+                    <div class="copyright">&copy; Copyright 2021 by Ingenious-Labs. All Rights Reserved</div>
+                </div>
+            </div>
+        </div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+						</div>
+					</div>
+		                        <!-- end of the loop -->
+
+            
+        
+</div><!-- #page -->
+
+</div><!-- /.page-wrapper -->
+
+
+
+
+<link data-minify="1" rel='preload'   href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-34.css?ver=1623056368' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" media='all' />
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=7.4.4' id='wp-polyfill-js'></script>
+<script type="rocketlazyloadscript" id='wp-polyfill-js-after'>
+( 'fetch' in window ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?ver=3.0.0" defer></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?ver=3.42.0" defer></scr' + 'ipt>' );( window.DOMRect ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js?ver=3.42.0" defer></scr' + 'ipt>' );( window.URL && window.URL.prototype && window.URLSearchParams ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-url.min.js?ver=3.6.4" defer></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?ver=3.0.12" defer></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?ver=2.0.2" defer></scr' + 'ipt>' );( 'objectFit' in document.documentElement.style ) || document.write( '<script src="http://www.ingenious-labs.com/wp-includes/js/dist/vendor/wp-polyfill-object-fit.min.js?ver=2.3.4" defer></scr' + 'ipt>' );
+</script>
+<script id='contact-form-7-js-extra'>
+var wpcf7 = {"api":{"root":"http:\/\/www.ingenious-labs.com\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+</script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.4.1' id='contact-form-7-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/knob/knob.js?ver=1622074568' id='knob-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/countdown/countdown.js?ver=1622074568' id='countdown-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jarallax/jarallax.min.js?ver=1622074568' id='jarallax-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/appear/appear.js?ver=1622074568' id='appear-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jquery-fancybox/jquery.fancybox.js?ver=1622074568' id='jquery-fancybox-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jquery-easing/jquery.easing.min.js?ver=1622074568' id='jquery-easing-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/wow/wow.js?ver=1622074568' id='wow-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/owl-carousel/owl.js?ver=1622074568' id='owl-carousel-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/mixitup/mixitup.js?ver=1622074568' id='mixitup-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/isotope/isotope.js?ver=1622074568' id='isotope-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js?ver=1622074568' id='jquery-ajaxchimp-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-includes/js/jquery/ui/selectmenu.min.js?ver=1.12.1' id='jquery-ui-selectmenu-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/js/linoor-addon.js?ver=1622074568' id='linoor-addon-script-js' defer></script>
+<script type="rocketlazyloadscript" id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id='rocket-preload-links-js-extra'>
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"http:\/\/www.ingenious-labs.com","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/bootstrap/js/bootstrap.bundle.min.js?ver=4.5.3' id='bootstrap-bundle-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/themes/linoor/assets/js/linoor-theme.js?ver=1623061899' id='linoor-theme-js' defer></script>
+<script src='http://www.ingenious-labs.com/wp-includes/js/wp-embed.min.js?ver=5.7.2' id='wp-embed-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.2.2' id='elementor-pro-webpack-runtime-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.2.3' id='elementor-webpack-runtime-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.2.3' id='elementor-frontend-modules-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.2.2' id='elementor-sticky-js' defer></script>
+<script type="rocketlazyloadscript" id='elementor-pro-frontend-js-before'>
+var ElementorProFrontendConfig = {"ajaxurl":"http:\/\/www.ingenious-labs.com\/wp-admin\/admin-ajax.php","nonce":"7ce98dd68b","urls":{"assets":"http:\/\/www.ingenious-labs.com\/wp-content\/plugins\/elementor-pro\/assets\/"},"i18n":{"toc_no_headings_found":"No headings were found on this page."},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"google":{"title":"Google+","has_counter":true},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"http:\/\/www.ingenious-labs.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.2.2' id='elementor-pro-frontend-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2' id='elementor-waypoints-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/swiper/swiper.min.js?ver=5.3.6' id='swiper-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/share-link/share-link.min.js?ver=3.2.3' id='share-link-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/dialog/dialog.min.js?ver=4.8.1' id='elementor-dialog-js' defer></script>
+<script type="rocketlazyloadscript" id='elementor-frontend-js-before'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Extra","value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Extra","value":1365,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1620,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"direction":"min","is_enabled":false}}},"version":"3.2.3","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"a11y_improvements":true,"landing-pages":true,"form-submissions":true},"urls":{"assets":"http:\/\/www.ingenious-labs.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":845,"title":"About%20Us%20%E2%80%93%20Ingenious%20Labs","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.2.3' id='elementor-frontend-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.2.2' id='pro-preloaded-elements-handlers-js' defer></script>
+<script type="rocketlazyloadscript" src='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/js/preloaded-modules.min.js?ver=3.2.3' id='preloaded-modules-js' defer></script>
+
+<script type="rocketlazyloadscript">"use strict";var wprRemoveCPCSS=function wprRemoveCPCSS(){var elem;document.querySelector('link[data-rocket-async="style"][rel="preload"]')?setTimeout(wprRemoveCPCSS,200):(elem=document.getElementById("rocket-critical-css"))&&"remove"in elem&&elem.remove()};window.addEventListener?window.addEventListener("load",wprRemoveCPCSS):window.attachEvent&&window.attachEvent("onload",wprRemoveCPCSS);</script><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik%3A300%2C400%2C700%7CTeko%3A300%2C400%2C500%2C600%2C700%26amp%3Bsubset%3Dlatin%2Clatin-ext%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CTeko%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRubik%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap" /><link rel='stylesheet' id='wp-block-library-css'  href='http://www.ingenious-labs.com/wp-includes/css/dist/block-library/style.min.css?ver=5.7.2' media='all' /><link data-minify="1" rel='stylesheet' id='contact-form-7-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1623056364' media='all' /><link data-minify="1" rel='stylesheet' id='owl-carousel-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/owl-carousel/owl.css?ver=1623056364' media='all' /><link data-minify="1" rel='stylesheet' id='jarallax-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/jarallax/jarallax.css?ver=1623056364' media='all' /><link rel='stylesheet' id='animate-css'  href='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/animate/animate.min.css?ver=1622074568' media='all' /><link rel='stylesheet' id='jquery-fancybox-css'  href='http://www.ingenious-labs.com/wp-content/plugins/linoor-addon/assets/vendors/jquery-fancybox/jquery.fancybox.min.css?ver=1622074568' media='all' /><link data-minify="1" rel='stylesheet' id='jquery-ui-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/linoor-addon/assets/vendors/jquery-ui/jquery-ui.css?ver=1623056364' media='all' /><link data-minify="1" rel='stylesheet' id='flaticons-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/vendors/flaticons/css/flaticon.css?ver=1623056364' media='all' /><link rel='stylesheet' id='bootstrap-css'  href='http://www.ingenious-labs.com/wp-content/themes/linoor/assets/vendors/bootstrap/css/bootstrap.min.css?ver=4.5.3' media='all' /><link data-minify="1" rel='stylesheet' id='fontawesome-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/vendors/fontawesome/css/all.min.css?ver=1623056364' media='all' /><link data-minify="1" rel='stylesheet' id='linoor-parent-style-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/style.css?ver=1623056364' media='all' /><link data-minify="1" rel='stylesheet' id='linoor-main-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/css/linoor-main.css?ver=1623056365' media='all' /><link data-minify="1" rel='stylesheet' id='linoor-responsive-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor/assets/css/linoor-responsive.css?ver=1623056365' media='all' /><link data-minify="1" rel='stylesheet' id='linoor-style-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/themes/linoor-child/style.css?ver=1623056365' media='all' /><link data-minify="1" rel='stylesheet' id='elementor-icons-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=1623056365' media='all' /><link rel='stylesheet' id='elementor-animations-css'  href='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.2.3' media='all' /><link rel='stylesheet' id='elementor-frontend-css'  href='http://www.ingenious-labs.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.2.3' media='all' /><link data-minify="1" rel='stylesheet' id='elementor-post-1135-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-1135.css?ver=1623056365' media='all' /><link rel='stylesheet' id='elementor-pro-css'  href='http://www.ingenious-labs.com/wp-content/plugins/elementor-pro/assets/css/frontend.min.css?ver=3.2.2' media='all' /><link data-minify="1" rel='stylesheet' id='elementor-global-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/global.css?ver=1623056365' media='all' /><link data-minify="1" rel='stylesheet' id='elementor-post-845-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-845.css?ver=1623056368' media='all' /><link data-minify="1" rel='stylesheet' id='srpw-style-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/plugins/smart-recent-posts-widget/assets/css/srpw-frontend.css?ver=1623056365' media='all' /><link data-minify="1" rel='stylesheet' id='elementor-post-34-css'  href='http://www.ingenious-labs.com/wp-content/cache/min/1/wp-content/uploads/elementor/css/post-34.css?ver=1623056368' media='all' /></noscript></body>
+
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1623061899 -->

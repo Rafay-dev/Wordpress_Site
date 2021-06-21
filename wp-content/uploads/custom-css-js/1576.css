@@ -52,5 +52,22 @@ End of comment */
 }
 .page-banner .image-layer{
 	filter: brightness(100%);
+}
+
+.project-single.style-two .text-col.col-lg-4{
+  display: none !important;
+}
+
+.left-based-text span{
+  font-size: 20px !important;
+}
+.slide-item .content-box .content .inner {
+    /*padding-left: 50px;*/
+}
+.left-based-text .base-inner .hours{
+      margin-right: 4% !important;
+}
+.filter-tabs.filter-btns li:not(li:nth-child(1)) sup{
+  display: none;
 }</style>
 <!-- end Simple Custom CSS and JS -->
