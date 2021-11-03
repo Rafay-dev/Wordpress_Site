@@ -462,6 +462,7 @@ figure {
   background-position: center center;
   background-repeat: no-repeat;
   background-image: url(http://www.ingenious-labs.com/wp-content/uploads/2021/06/prealoder_new.gif);
+
   
 }
 
@@ -2114,7 +2115,7 @@ img.lazy-image.loaded {
   left: 0;
   bottom: 0;
   width: 730px;
-  height: 24px;
+  height: 35px;
   transform-origin: left bottom;
   transform: rotate(-90deg);
 }
