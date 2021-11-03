@@ -12,7 +12,7 @@ jQuery(document).ready(function( $ ){
   $("#more_prod_btn_txt").html("Show More Products");
   $("#mapDiv").addClass("hide");
   $("#mapDiv .place-card-large .place-name").html("IngeniousLabs");
-  $("#more_products_btn a").attr("href", "/our-products")
+  $("#more_products_btn a").attr("href", "http://www.ingenious-labs.com/our-products")
   $(".project-single.style-two .text-col.col-md-12").removeClass("col-lg-8");
   $(".project-single.style-two .text-col.col-md-12").css("text-align", "justify");
 });
