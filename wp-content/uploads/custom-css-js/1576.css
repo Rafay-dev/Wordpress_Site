@@ -52,5 +52,9 @@ End of comment */
 }
 .page-banner .image-layer{
 	filter: brightness(100%);
+}
+
+.project-single.style-two .text-col.col-lg-4{
+  display: none !important;
 }</style>
 <!-- end Simple Custom CSS and JS -->
